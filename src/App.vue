@@ -1,24 +1,53 @@
 <template>
-    <div>
-        <h1>App Component</h1>
-        <FormComponent/>
-        <ListData/>
-    </div>
+    <header>
+        <h1>ระบบจัดการข้อมูลพนังงาน</h1>
+    </header>
+    <section class="employees-content">
+        <h2>ข้อมูลพนักงาน</h2>
+        <ListData />
+    </section>
 </template>
 
 <script>
 import ListData from './components/ListData.vue';
-import FormComponent from './components/FormComponent.vue';
 
 export default {
     name: "App",
     components: {
-        ListData,
-        FormComponent
+        ListData
     }
 }
 </script>
 
 <style>
+    * {
+        box-sizing: border-box;
+    }
 
+    body {
+        margin: 0;
+    }
+
+    header {
+        color: #ffffff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, .50);
+        background: #252525;
+        padding: .5em;
+        margin: 1em;
+        border-radius: 15px;
+        text-align: center;
+    }
+    .employees-content {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, .50);
+        padding: .5em;
+        margin: 1em;
+        border-radius: 15px;
+        text-align: center;
+    }
+    
+    .employees-content h2 {
+        font-size: 2rem;
+        border-bottom: 1px solid #252525;
+        color: purple;
+    }
 </style>
