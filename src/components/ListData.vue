@@ -7,6 +7,8 @@
             :age="item.age" 
             :salary="item.salary" 
             :isVisible="item.isVisible"
+            @showDetails="toggleVisible"
+            @deleteData="deleteData"
         />
     </ul>
 </template>
@@ -64,6 +66,24 @@ export default {
                     isVisible: false
                 },
             ]
+        }
+    },
+    methods: {
+        toggleVisible(emp_id) {
+            this.employees = this.employees.map((item) => {
+                if(item.id === emp_id) {
+                    return {
+                        ...item, 
+                        isVisible: !item.isVisible
+                    }
+                }
+                return item
+            })
+        },
+        deleteData(emp_id) {
+            this.employees = this.employees.filter(item => {
+                return item.id !== emp_id
+            })
         }
     }
 }

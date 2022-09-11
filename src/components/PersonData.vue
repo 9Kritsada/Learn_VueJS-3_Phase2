@@ -1,12 +1,14 @@
 <template>
     <li>
         <h3>Name: {{name}}</h3>
-        <button>Details</button>
-        <button>Delete</button>
-        <div v-show="isVisible">
-            <p>age: {{age}} Years</p>
-            <p>Salary: {{salary}} Baht</p>
-        </div>
+        <button @click="showDetails(id)">Details</button>
+        <button @click="deleteData(id)">Delete</button>
+        <transition name="fade">
+            <div v-show="isVisible">
+                <p>age: {{age}} Years</p>
+                <p>Salary: {{salary}} Baht</p>
+            </div>
+        </transition>
     </li>
 </template>
 
@@ -34,6 +36,14 @@ export default {
             type: Boolean,
             required: true
         }
+    },
+    methods: {
+        showDetails(id) {
+            this.$emit("showDetails", id);
+        },
+        deleteData(id) {
+            this.$emit("deleteData", id);
+        }
     }
 }
 </script>
@@ -54,5 +64,11 @@ export default {
         background: #8ddba4;
         border-radius: 5px;
         padding: 1em;
+    }
+    .fade-enter-from {
+        opacity: 0;
+    }
+    .fade-enter-active {
+        transition: all .5s ease;
     }
 </style>
