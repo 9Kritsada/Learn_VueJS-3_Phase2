@@ -2,19 +2,34 @@
     <header>
         <h1>ระบบจัดการข้อมูลพนังงาน</h1>
     </header>
-    <section class="employees-content">
+    <FormComponent @save="insertEmplyees" />
+    <section class="employees-content" v-if="employees.length > 0">
         <h2>ข้อมูลพนักงาน</h2>
-        <ListData />
+        <ListData :employees="employees" />
     </section>
 </template>
 
 <script>
 import ListData from './components/ListData.vue';
+import FormComponent from './components/FormComponent.vue';
 
 export default {
     name: "App",
     components: {
-        ListData
+        ListData,
+        FormComponent
+    },
+    data() {
+        return {
+            employees: [
+
+            ]
+        }
+    },
+    methods: {
+        insertEmplyees(data) {
+            this.employees.push(data)
+        }
     }
 }
 </script>

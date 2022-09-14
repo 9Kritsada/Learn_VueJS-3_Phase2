@@ -1,14 +1,13 @@
 <template>
     <ul>
-        <PersonData v-for="(item, id) in employees" 
-            :key="id" 
-            :id="item.id" 
+        <PersonData v-for="(item, index) in employees" 
+            :key="index" 
             :name="item.name" 
             :age="item.age" 
             :salary="item.salary" 
-            :isVisible="item.isVisible"
-            @showDetails="toggleVisible"
-            @deleteData="deleteData"
+            :position="item.position" 
+            :gender="item.gender"
+            :skill="item.skill" 
         />
     </ul>
 </template>
@@ -18,74 +17,11 @@ import PersonData from './PersonData.vue';
 export default {
     name: "ListData",
     components: {
-        PersonData
+        PersonData,
     },
-    data() {
-        return {
-            employees: [
-                {
-                    id: 1,
-                    name: "John",
-                    age: "23",
-                    salary: 45000,
-                    isVisible: false
-                },
-                {
-                    id: 2,
-                    name: "Kong",
-                    age: "29",
-                    salary: 50000,
-                    isVisible: false
-                },
-                {
-                    id: 3,
-                    name: "Fire",
-                    age: "21",
-                    salary: 35000,
-                    isVisible: false
-                    
-                },
-                {
-                    id: 4,
-                    name: "Gel",
-                    age: "25",
-                    salary: 45000,
-                    isVisible: false
-                },
-                {
-                    id: 5,
-                    name: "Poon",
-                    age: "19",
-                    salary: 20000,
-                    isVisible: false
-                },
-                {
-                    id: 6,
-                    name: "Jirun",
-                    salary: 20000,
-                    isVisible: false
-                },
-            ]
-        }
-    },
-    methods: {
-        toggleVisible(emp_id) {
-            this.employees = this.employees.map((item) => {
-                if(item.id === emp_id) {
-                    return {
-                        ...item, 
-                        isVisible: !item.isVisible
-                    }
-                }
-                return item
-            })
-        },
-        deleteData(emp_id) {
-            this.employees = this.employees.filter(item => {
-                return item.id !== emp_id
-            })
-        }
-    }
+    props: [
+        "employees"
+    ]
 }
 </script>
 

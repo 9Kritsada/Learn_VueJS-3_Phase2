@@ -1,20 +1,29 @@
 <template>
-    <li>
-        <h3>Name: {{name}}</h3>
-        <button @click="showDetails(id)">Details</button>
-        <button @click="deleteData(id)">Delete</button>
-        <transition name="fade">
-            <div v-show="isVisible">
-                <p>age: {{age}} Years</p>
-                <p>Salary: {{salary}} Baht</p>
-            </div>
-        </transition>
-    </li>
+    <CardData>
+        <!-- Card Header -->
+        <template v-slot:card-header>
+            <h3>Name: {{name}}</h3>
+        </template>
+        
+        <!-- Card Content -->
+        <template v-slot:card-content>
+            <p>อายุ {{age}}</p>
+            <p>เงินเดือน {{salary}}</p>
+            <p>ตำแหน่ง {{position}}</p>
+            <p>ทักษะ {{skill}}</p>
+            <p>เพศ {{gender}}</p>
+        </template>
+    </CardData>
 </template>
 
 <script>
+import CardData from "./CardData.vue"
+
 export default {
     name: "PersonData",
+    components : {
+        CardData
+    },
     props: {
         id: {
             type: Number,
@@ -32,17 +41,14 @@ export default {
             type: Number,
             required: true   
         },
-        isVisible: {
-            type: Boolean,
-            required: true
-        }
-    },
-    methods: {
-        showDetails(id) {
-            this.$emit("showDetails", id);
+        position: {
+            type: String
         },
-        deleteData(id) {
-            this.$emit("deleteData", id);
+        gender: {
+            type: String,
+        },
+        skill: {
+            type: Array,
         }
     }
 }
@@ -57,13 +63,6 @@ export default {
         border: 1px solid #ff0077;
         background: #ff0077;
         border-radius: 10px;
-    }
-    li {
-        margin: 1em 0;
-        font-size: 1.23rem;
-        background: #8ddba4;
-        border-radius: 5px;
-        padding: 1em;
     }
     .fade-enter-from {
         opacity: 0;
